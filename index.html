@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+   RONI'S WEBSITE  —  QUICK EDITING GUIDE  (read me first!)
+  ============================================================================
+
+  This whole website is ONE file. To change anything, edit this file, then
+  save + commit it to GitHub. The live site updates in about a minute.
+
+  DON'T PANIC about the code. You only ever need to change the plain-English
+  text between the > and < symbols. Example:
+
+        <h3>Credit Card Fraud Detection</h3>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^  <- only edit THIS part
+
+  HOW TO FIND THINGS:
+    Use Ctrl+F (Cmd+F on Mac) to search this file for a word you can see on
+    the site (like a project title). It'll jump you right to it.
+
+  THE PAGE IS IN TWO HALVES:
+    1. The <style> block (top)  = colors, spacing, fonts. Leave this alone
+       unless you want to change how things LOOK.
+    2. The <body> block (lower) = the actual words & sections on your page.
+       This is where you'll do 99% of your edits.
+
+  EACH SECTION BELOW HAS ITS OWN  "HOW TO EDIT"  NOTE right above it that
+  tells you how to change text, add a project, add a photo, etc.
+
+  GOLDEN RULES:
+    • Every tag that opens must close:  <h3>Title</h3>  (note the / )
+    • To copy an item (project, photo, job), copy the WHOLE block from one
+      <div ...> down to its matching </div>, paste it, then edit the text.
+    • Special symbols: write & as &amp;  and  keep accents like R² as-is.
+    • When unsure, change ONE thing, save, and check the site before doing more.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roni | Portfolio</title>
+<meta name="description" content="Roni's personal site with resume, projects, and photography.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- =========================================================================
+     LOOKS / STYLING  (colors, fonts, spacing)
+     You can skip this whole block. To change the main accent color, edit the
+     hex code after  --accent:  just below (e.g. #e04b2f is the orange-red).
+     Everything visual is controlled here; the actual page content starts much
+     further down, at  <body>.
+========================================================================== -->
+<style>
+  :root{
+    --accent:#e04b2f;      /* ink-splash red-orange */
+    --accent-2:#6d69c5;    /* muted violet */
+    --yellow:#e8b23a;
+    --teal:#3a9d8a;
+    --blue:#4d7bbf;
+    --ink:#252222;         /* near-black */
+    --paper:#f6eed6;       /* rich cream */
+    --card:#f1e7cd;        /* deeper cream card (not white) */
+    --line:rgba(37,34,34,0.12);
+    --muted:#6b6660;
+    --radius:6px;
+    --shadow: 0 8px 30px rgba(37,34,34,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Lora', Georgia, serif;font-weight:600;letter-spacing:-0.01em;}
+  .logo{font-family:'Lora', Georgia, serif;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:100px 0;}
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 24px;
+    pointer-events:none;
+    background:linear-gradient(var(--paper) 55%, rgba(246,238,214,0));
+  }
+  .nav-bar{
+    max-width:1120px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+  }
+  .nav-bar > *{pointer-events:auto;}
+  .logo{font-weight:700;font-size:1.4rem;text-decoration:none;letter-spacing:0.02em;}
+  .logo span{color:var(--accent);}
+  .nav-island{
+    background:rgba(246,238,214,0.3);
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    border:1px solid rgba(37,34,34,0.1);
+    border-radius:999px;
+    padding:7px 9px;
+    box-shadow:0 6px 26px rgba(37,34,34,0.1);
+  }
+  .navlinks{display:flex;gap:2px;list-style:none;margin:0;padding:0;align-items:center;}
+  .navlinks a{
+    text-decoration:none;font-weight:500;font-size:.9rem;
+    color:var(--ink);opacity:.9;
+    padding:8px 16px;border-radius:999px;
+    transition:background .2s, color .2s, opacity .2s;
+  }
+  .navlinks a:hover{opacity:1;background:var(--accent);color:var(--paper);}
+  .navlinks a[href*="github"]:hover{background:var(--blue);color:var(--paper);}
+  .contact-pill{
+    text-decoration:none;font-weight:600;font-size:.9rem;white-space:nowrap;
+    color:var(--paper);background:var(--ink);
+    padding:12px 24px;border-radius:999px;
+    box-shadow:0 6px 26px rgba(37,34,34,0.12);
+    transition:background .2s, transform .15s;
+  }
+  .contact-pill:hover{background:var(--accent);transform:translateY(-1px);}
+  .nav-toggle{display:none;background:rgba(246,238,214,0.3);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(37,34,34,0.1);border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;color:var(--ink);box-shadow:0 6px 26px rgba(37,34,34,0.1);}
+
+  /* HERO */
+  .hero{
+    padding:150px 0 90px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:.8rem;font-weight:600;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.14em;
+    margin-bottom:26px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,7vw,5.4rem);
+    font-weight:600;
+    margin:0 auto 26px;
+    line-height:1.02;
+    max-width:16ch;
+  }
+  .hero h1 .hl{
+    color:var(--accent);
+    font-style:italic;
+  }
+  .hero p.sub{
+    max-width:600px;margin:0 auto 38px;
+    color:var(--muted);font-size:1.18rem;
+  }
+  .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 28px;border-radius:2px;
+    font-weight:600;font-size:.92rem;
+    text-decoration:none;
+    border:1.5px solid var(--ink);
+    transition:transform .15s ease, background .2s ease, color .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--ink);color:var(--paper);}
+  .btn-solid:hover{background:var(--accent);border-color:var(--accent);}
+  .btn-outline{background:transparent;color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+
+  /* SECTION HEADINGS */
+  .section-head{margin-bottom:52px;text-align:center;}
+  .section-head .tag{
+    display:inline-block;font-weight:600;font-size:.8rem;
+    color:var(--accent);text-transform:uppercase;letter-spacing:.14em;
+    margin-bottom:12px;
+  }
+  .section-head h2{font-size:clamp(2rem,4.5vw,3rem);margin:0;font-weight:600;}
+
+  /* ABOUT */
+  #about .wrap{max-width:820px;text-align:center;}
+  #about p{font-size:1.25rem;color:var(--ink);line-height:1.7;}
+  .hobby-pills{
+    margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  }
+  .pill{
+    background:transparent;border:1.5px solid var(--line);
+    padding:8px 18px;border-radius:2px;font-size:.9rem;font-weight:500;
+  }
+
+  /* RESUME / TIMELINE */
+  #resume{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .resume-download{text-align:center;margin-bottom:56px;}
+  .timeline{
+    max-width:640px;margin:0 auto;
+    border-left:2px solid var(--line);
+    padding-left:34px;
+  }
+  .timeline-item{position:relative;margin-bottom:40px;}
+  .timeline-item::before{
+    content:"";position:absolute;left:-42px;top:7px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--accent);border:3px solid var(--paper);
+  }
+  .timeline-item:nth-child(2)::before{background:var(--accent-2);}
+  .timeline-item:nth-child(3)::before{background:var(--teal);}
+  .timeline-item:nth-child(4)::before{background:var(--yellow);}
+  .timeline-item .period{font-size:.82rem;color:var(--muted);font-weight:600;letter-spacing:.03em;text-transform:uppercase;}
+  .timeline-item h3{margin:6px 0 8px;font-size:1.25rem;font-weight:600;}
+  .timeline-item p{margin:0;color:var(--muted);}
+
+  .skills-grid{
+    max-width:760px;margin:56px auto 0;
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  }
+
+  /* GRID CARDS (projects) */
+  .grid{display:grid;gap:24px;}
+  .grid-3{grid-template-columns:repeat(auto-fit, minmax(280px,1fr));}
+  .card{
+    background:var(--card);border-radius:var(--radius);
+    padding:30px;
+    border:1px solid var(--line);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(37,34,34,0.25);}
+  .card .icon{font-size:1.7rem;margin-bottom:16px;}
+  .card h3{margin:0 0 10px;font-size:1.3rem;font-weight:600;}
+  .card p{margin:0 0 18px;color:var(--muted);font-size:.98rem;}
+  .card .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+  .tag-chip{
+    font-size:.74rem;font-weight:600;padding:4px 11px;border-radius:2px;
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    letter-spacing:.02em;
+  }
+  .card a.link{font-weight:600;font-size:.9rem;text-decoration:none;color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s;}
+  .card a.link:hover{border-color:var(--accent);}
+  .edu-school{margin:0 0 4px;color:var(--ink);font-weight:500;font-size:1rem;}
+  .edu-date{margin:0;color:var(--muted);font-size:.85rem;font-weight:500;letter-spacing:.02em;}
+
+  .projects-footer{text-align:center;margin-top:44px;}
+
+  /* PHOTOGRAPHY */
+  .photo-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+  }
+  .photo-tile{
+    aspect-ratio:4/5;border-radius:6px;position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;padding:16px;
+    font-size:.85rem;font-weight:500;
+    border:1px solid var(--line);
+  }
+  .photo-tile span{
+    background:rgba(246,238,214,0.82);color:var(--ink);
+    padding:5px 12px;border-radius:3px;backdrop-filter:blur(4px);
+  }
+  .photo-tile.p1{background:url('images/web/p1.jpg') center/cover no-repeat;}
+  .photo-tile.p2{background:url('images/web/p2.jpg') center/cover no-repeat;}
+  .photo-tile.p3{background:url('images/web/p3.jpg') center/cover no-repeat;}
+  .photo-tile.p4{background:url('images/web/p4.jpg') center/cover no-repeat;}
+  .photo-tile.p5{background:url('images/web/p5.jpg') center/cover no-repeat;}
+  .photo-tile.p6{background:url('images/web/p6.jpg') center/cover no-repeat;}
+  .photo-tile.p7{background:url('images/web/p7.jpg') center/cover no-repeat;}
+  .photo-tile.p8{background:url('images/web/p8.jpg') center/cover no-repeat;}
+  .photo-note{
+    text-align:center;color:var(--muted);
+    font-size:.85rem;margin-top:28px;
+  }
+
+  /* CONTACT / FOOTER */
+  #contact{text-align:center;border-top:1px solid var(--line);}
+  #contact h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:16px;font-weight:600;}
+  #contact p{color:var(--muted);margin-bottom:34px;font-size:1.15rem;}
+  footer{
+    text-align:center;padding:40px 24px 130px;color:var(--muted);font-size:.85rem;
+    border-top:1px solid var(--line);
+  }
+  footer a{text-decoration:none;font-weight:600;color:var(--ink);}
+
+  /* BOTTOM DARK DOCK (vertical cumulative progress) */
+  .dock{
+    position:fixed;bottom:24px;left:24px;z-index:100;
+    display:flex;align-items:stretch;gap:18px;
+    background:rgba(246,238,214,0.3);
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    border:1px solid rgba(37,34,34,0.1);
+    border-radius:18px;padding:20px 26px 20px 20px;
+    box-shadow:0 16px 44px rgba(37,34,34,0.14);
+  }
+  .dock-track{
+    position:relative;width:6px;border-radius:3px;flex:none;
+    background:rgba(37,34,34,0.1);
+  }
+  .dock-fill{
+    position:absolute;top:0;left:0;width:100%;height:0;
+    border-radius:3px;background:var(--accent);
+    box-shadow:0 0 10px rgba(224,75,47,0.5), 0 0 20px rgba(224,75,47,0.3);
+    transition:height .4s cubic-bezier(.4,0,.2,1);
+  }
+  .dock-list{display:flex;flex-direction:column;gap:16px;}
+  .dock-link{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;letter-spacing:.04em;
+    font-size:.82rem;font-weight:500;line-height:1;
+    color:rgba(37,34,34,0.42);
+    text-decoration:none;position:relative;padding-left:20px;
+    transition:color .2s;white-space:nowrap;
+  }
+  .dock-link:hover{color:var(--ink);}
+  .dock-link.reached{color:rgba(37,34,34,0.62);}
+  .dock-link.active{color:var(--ink);font-weight:700;}
+  .dock-link.upcoming::before{
+    content:"";position:absolute;left:3px;top:50%;transform:translateY(-50%);
+    width:5px;height:5px;border-radius:50%;background:rgba(37,34,34,0.32);
+  }
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    .nav-island{background:none;border:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0;position:static;}
+    .navlinks{
+      position:fixed;top:74px;left:16px;right:16px;
+      background:rgba(246,238,214,0.85);
+      -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+      flex-direction:column;align-items:stretch;
+      padding:12px;gap:4px;border-radius:16px;
+      border:1px solid var(--line);
+      box-shadow:0 12px 34px rgba(37,34,34,.14);
+      transform:translateY(-160%);transition:transform .25s ease;
+    }
+    .navlinks a{padding:12px 16px;}
+    .navlinks.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+    section{padding:72px 0;}
+  }
+  @media (max-width:640px){
+    .dock{left:12px;bottom:12px;padding:14px 18px 14px 14px;gap:14px;}
+    .dock-list{gap:12px;}
+    .dock-link{font-size:.72rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================================
+     TOP NAVIGATION BAR (the menu links at the top).
+     Each menu item is one <li><a href="#section">Label</a></li>. The href
+     "#about", "#projects" etc. must match a section's id="..." lower in the
+     page. Change the Label text to rename a menu item.
+========================================================================== -->
+<header>
+  <div class="nav-bar">
+    <a href="#top" class="logo">roni<span>.</span></a>
+    <nav class="nav-island">
+      <ul class="navlinks" id="navlinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Resume</a></li>
+        <li><a href="https://github.com/iamronim1" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#photography">Photography</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="contact-pill">Contact</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- =======================================================================
+       HERO  (the big intro at the very top)
+       • Change your name: edit the text inside <span class="hl">Roni</span>.
+       • Change the one-line intro: edit the sentence inside <p class="sub">...</p>.
+  ======================================================================== -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>Hi, I'm <span class="hl">Roni</span></h1>
+      <p class="sub">A mathematician at heart and a data scientist by trade. I turn messy data into models people can use, and complicated ideas into something anyone can follow. When I'm not doing that, you'll find me out with my camera!</p>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       ABOUT  ("A little about me")
+       • Edit the heading inside <h2>...</h2>.
+       • Edit your bio paragraph inside <p>...</p>.
+       • The little tag "pills" are each a <span class="pill">...</span>. To add
+         one, copy a whole pill line and change the emoji + word. To remove one,
+         delete its line.
+  ======================================================================== -->
+  <section id="about" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A little about me</h2>
+      </div>
+      <p>I recently finished my master's in Applied Data Science at East Tennessee State University, where I also worked as a graduate statistical consultant helping researchers design studies and make sense of their data. My projects cover healthcare, retail, education, and bioenergy. Some come from collaborations with Oak Ridge National Laboratory, Eastman Chemical Company, and the Niswonger Foundation; others are personal projects, like fraud detection, sales forecasting, and multivariate health analysis, plus thesis research on synthetic time series. I hold my statistics to a high standard. And I hold my results to a simpler one: they have to make sense to the people who use them.</p>
+      <div class="hobby-pills">
+        <span class="pill">📸 Photography</span>
+        <span class="pill">💻 Code</span>
+        <span class="pill">📊 Statistics</span>
+        <span class="pill">🌍 Data for good</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       DATA SCIENCE WORK  ("Putting data to work")  — a timeline of jobs.
+       • Each job is one <div class="timeline-item"> ... </div> block with:
+             <div class="period">   the dates
+             <h3>                    the job title / employer
+             <p>                     the description
+       • TO ADD A JOB: copy an entire <div class="timeline-item">...</div>
+         block, paste it directly above or below another one, and edit the
+         date, title, and paragraph. Newest usually goes at the top.
+       • TO REMOVE A JOB: delete its whole <div class="timeline-item">...</div>.
+       • RESUME PDF: the "Download Full Resume" button points to resume.pdf.
+         To update it, replace the resume.pdf file in this same folder.
+       • SKILL TAGS (the row of chips lower down): each skill is one
+         <span class="tag-chip">Skill</span>. Copy a line to add a skill,
+         delete a line to remove one. Write "&amp;" instead of "&".
+  ======================================================================== -->
+  <section id="experience" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Putting data to work</h2>
+      </div>
+      <div class="resume-download">
+        <a href="resume.pdf" class="btn btn-solid" download>⬇ Download Full Resume (PDF)</a>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="period">Aug 2025 - May 2026</div>
+          <h3>Data Science Practicum · Oak Ridge National Laboratory</h3>
+          <p>Oak Ridge studies poplar trees as a source of renewable biofuel, and breeding better ones is slow because you normally have to grow a plant to full size before you know how it turned out. I built an end-to-end Python pipeline over multi-modal images of 446 poplar plants that predicted each plant's final biomass (Lasso cross-validated R² = 0.74) and, using nothing more than ordinary RGB cameras, could flag the top performers as early as day 13 to 14, so researchers can spot promising plants weeks sooner and cheaper than before.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="period">Jan 2026 - May 2026</div>
+          <h3>Data Science Practicum · Niswonger Foundation</h3>
+          <p>The Niswonger Foundation helps students across our region get to and through college, and its advisors had three years of notes scattered across inconsistent records that were hard to learn anything from. I reorganized all of it into a clean, normalized 8-table database (95 students and 1,456 advising interactions) and built a Python ETL pipeline that even recovered 180+ case notes that had effectively been hidden in the mess. From there I ran an exploratory analysis with 21 visualizations, turning years of loose paperwork into a picture the foundation could actually use.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="period">Jan 2024 - May 2024</div>
+          <h3>Data Science Practicum · Eastman Chemical Company</h3>
+          <p>Eastman's technical staff write up call reports after meeting with customers, but the free-text notes vary a lot in how useful they are. I built a natural-language-processing pipeline that scores the quality of those reports automatically, using LDA topic modeling and Word2Vec to tell substantive, relevant content apart from filler, so the company can find its most valuable notes without reading every one by hand.</p>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <span class="tag-chip">Python</span>
+        <span class="tag-chip">R</span>
+        <span class="tag-chip">SQL</span>
+        <span class="tag-chip">SAS</span>
+        <span class="tag-chip">MATLAB</span>
+        <span class="tag-chip">Power BI</span>
+        <span class="tag-chip">scikit-learn</span>
+        <span class="tag-chip">XGBoost</span>
+        <span class="tag-chip">PyTorch</span>
+        <span class="tag-chip">pandas</span>
+        <span class="tag-chip">NumPy</span>
+        <span class="tag-chip">SciPy</span>
+        <span class="tag-chip">statsmodels</span>
+        <span class="tag-chip">SHAP</span>
+        <span class="tag-chip">imbalanced-learn (SMOTE)</span>
+        <span class="tag-chip">matplotlib</span>
+        <span class="tag-chip">seaborn</span>
+        <span class="tag-chip">Git</span>
+        <span class="tag-chip">Machine Learning</span>
+        <span class="tag-chip">Deep Learning</span>
+        <span class="tag-chip">Time Series</span>
+        <span class="tag-chip">Multivariate Statistics</span>
+        <span class="tag-chip">NLP &amp; Topic Modeling</span>
+        <span class="tag-chip">Feature Engineering</span>
+        <span class="tag-chip">Experimental Design</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TEACHING  ("Sharing what I know")  — same timeline format as above.
+       • Each role = one <div class="timeline-item">...</div> (dates, <h3> title,
+         <p> description). Copy a block to add a role, delete one to remove it.
+  ======================================================================== -->
+  <section id="teaching" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Sharing what I know</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="period">Aug 2025 - May 2026</div>
+          <h3>Graduate Statistical Consultant · Statistical Consulting Lab, ETSU</h3>
+          <p>ETSU's Statistical Consulting Lab offers free statistics help to faculty, staff, and graduate students across the university, and I was one of the consultants people came to. Over the year I supported 30+ research projects from fields as varied as nursing, biology, and education, guiding researchers through the whole process, from designing a study or survey to collecting, organizing, and finally analyzing their data. I ran the analyses in R, SAS, Python, and Excel, and just as importantly, translated the results into plain language for people who don't speak statistics. I also led short workshops and one-on-one training sessions, usually over a two-to-four-week stretch with each client.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="period">Aug 2023 - Aug 2025</div>
+          <h3>Graduate Teaching Assistant · Dept. of Mathematics &amp; Statistics, ETSU</h3>
+          <p>For two years I taught in ETSU's Department of Mathematics and Statistics. One year I was the Instructor of Record for Precalculus (Algebra), running my own section of 80+ students, from lectures and assessments to office-hours support. The other year I served as a teaching assistant for Probability and Statistics, helping with instruction and grading for a course of 200+ students.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       PROJECTS  ("Things I've worked on")  — a grid of project cards.
+       Each project is ONE <div class="card"> ... </div> block containing:
+             <div class="icon">💳</div>      an emoji icon (change to any emoji)
+             <h3>...</h3>                     the project title
+             <p>...</p>                       the short description
+             <div class="tags">...</div>      the little tech tags (one <span> each)
+             <a class="link" href="...">      the GitHub link for this project
+
+       ----------------------------------------------------------------------
+       TO ADD A NEW PROJECT: copy everything between the two lines marked
+       "PROJECT CARD START/END" below, paste it right after an existing card,
+       then change the emoji, title, description, tags, and the href link.
+       ----------------------------------------------------------------------
+       TO REMOVE A PROJECT: delete its whole <div class="card">...</div> block.
+       TO REORDER: cut a card block and paste it where you want it.
+       The grid re-arranges itself automatically — no other changes needed.
+  ======================================================================== -->
+  <section id="projects" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Things I've worked on</h2>
+      </div>
+      <div class="grid grid-3">
+        <!-- ===== PROJECT CARD START (copy this whole block to add a project) ===== -->
+        <div class="card">
+          <div class="icon">💳</div>
+          <h3>Credit Card Fraud Detection</h3>
+          <p>Catching fraudulent transactions when only 0.17% are actually fraud. I compared Logistic Regression, Random Forest, and XGBoost, used SMOTE to handle the imbalance, and SHAP to explain why each call was made.</p>
+          <div class="tags"><span class="tag-chip">Python</span><span class="tag-chip">XGBoost</span><span class="tag-chip">SHAP</span></div>
+          <a class="link" href="https://github.com/iamronim1/Credit-Card-Fraud-Detection-ML" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <!-- ===== PROJECT CARD END ===== -->
+        <div class="card">
+          <div class="icon">❤️</div>
+          <h3>Cardiometabolic Risk Analysis</h3>
+          <p>Digging into 10,616 NHANES health records to find which biomarkers drive cardiometabolic risk, using PCA, Hotelling's T², and MANOVA.</p>
+          <div class="tags"><span class="tag-chip">R</span><span class="tag-chip">Multivariate Stats</span><span class="tag-chip">PCA</span></div>
+          <a class="link" href="https://github.com/iamronim1/Cardiometabolic-Risk-Multivariate-Analysis" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Superstore Sales Forecasting</h3>
+          <p>Forecasting future furniture sales from years of retail history, using SARIMA (SAS PROC ARIMA) with Python for the data prep.</p>
+          <div class="tags"><span class="tag-chip">SARIMA</span><span class="tag-chip">SAS</span><span class="tag-chip">Python</span></div>
+          <a class="link" href="https://github.com/iamronim1/Time-Series_Superstore-Sales-Forecasting" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="card">
+          <div class="icon">📚</div>
+          <h3>Reading Proficiency vs. Library Funding</h3>
+          <p>Asking whether library funding, staffing, and demographics can predict how well a school's students read, using Lasso, Ridge, Random Forest, and XGBoost (test R² = 0.74).</p>
+          <div class="tags"><span class="tag-chip">Python</span><span class="tag-chip">scikit-learn</span><span class="tag-chip">Regression</span></div>
+          <a class="link" href="https://github.com/iamronim1/Predicting-Reading-Proficiency-from-Library-Funding" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>ORNL Poplar Phenotyping</h3>
+          <p>Spotting the best biofuel poplars early from camera images alone, with growth-curve modeling, heritability analysis, and predictive ML on ORNL Advanced Plant Phenotyping Lab data.</p>
+          <div class="tags"><span class="tag-chip">Python</span><span class="tag-chip">ML</span><span class="tag-chip">SHAP</span></div>
+          <a class="link" href="https://github.com/iamronim1/ORNL-Poplar-Phenotyping-Analysis" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="card">
+          <div class="icon">🧬</div>
+          <h3>DGAN + Soft-DTW Post-Processing</h3>
+          <p>Making AI-generated synthetic time series more realistic, with a post-processing framework using Soft-DTW alignment and ARMA-based statistical evaluation (my master's thesis).</p>
+          <div class="tags"><span class="tag-chip">Python</span><span class="tag-chip">GANs</span><span class="tag-chip">Time Series</span></div>
+          <a class="link" href="https://github.com/iamronim1/DGAN-SoftDTW-Postprocessing" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="projects-footer">
+        <a href="https://github.com/iamronim1" target="_blank" rel="noopener" class="btn btn-outline">See all repos on GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       EDUCATION  ("How I got here")  — a grid of degree cards.
+       Each degree = one <div class="card"> with an emoji <div class="icon">,
+       the degree <h3>, the school <p class="edu-school">, and the date/place
+       <p class="edu-date">. Copy a card block to add a degree; delete one to
+       remove it.
+  ======================================================================== -->
+  <section id="education" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How I got here</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon">🎓</div>
+          <h3>M.S. Applied Data Science</h3>
+          <p class="edu-school">East Tennessee State University</p>
+          <p class="edu-date">May 2026 · Johnson City, TN</p>
+        </div>
+        <div class="card">
+          <div class="icon">📐</div>
+          <h3>M.S. Mathematical Sciences</h3>
+          <p class="edu-school">East Tennessee State University</p>
+          <p class="edu-date">Dec 2025 · Johnson City, TN</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧮</div>
+          <h3>B.S. Mathematics</h3>
+          <p class="edu-school">University of Dhaka</p>
+          <p class="edu-date">Dec 2021 · Dhaka, Bangladesh</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       PHOTOGRAPHY  ("Through my lens")  — a grid of photo tiles.
+       Each photo is one line:  <div class="photo-tile pN"><span>Caption</span></div>
+       where pN (p1, p2, p3 ...) tells the page WHICH image file to show.
+
+       • TO CHANGE A CAPTION: edit the words inside <span>...</span>.
+         (Want NO caption on a tile? Just leave it empty: <span></span>.)
+
+       • TO SWAP THE PHOTO in a tile: replace the image file it points to.
+         Tile p1 shows the file  images/web/p1.jpg , p2 shows p2.jpg, etc.
+         Drop a new picture into the images/web folder named p1.jpg (etc.),
+         and that tile updates. Keep photos web-sized (~1200px, under ~300KB)
+         so the page loads fast.
+
+       • TO ADD A NEW PHOTO (a 9th, 10th ...):
+           1. Put the web-sized image in images/web named  p9.jpg  (next number).
+           2. Add a matching line here:
+                <div class="photo-tile p9"><span>Caption</span></div>
+           3. In the STYLING block up top, find the ".photo-tile.p8" line and
+              copy it as a new ".photo-tile.p9" line pointing to p9.jpg. Just
+              ask me to do step 3 if you'd rather not touch the style block.
+
+       • TO REMOVE A PHOTO: delete its <div class="photo-tile ...> line.
+  ======================================================================== -->
+  <section id="photography" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Through my lens</h2>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-tile p1"><span>Kitty</span></div>
+        <div class="photo-tile p2"><span>Mystic</span></div>
+        <div class="photo-tile p3"><span>Falls in the forest</span></div>
+        <div class="photo-tile p4"><span>Cascade over the rocks</span></div>
+        <div class="photo-tile p5"><span>Storm rolling in</span></div>
+        <div class="photo-tile p6"><span>Color on the walls</span></div>
+        <div class="photo-tile p7"><span>Lighthouse on the coast</span></div>
+        <div class="photo-tile p8"><span>By the harbor</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       CONTACT  ("Let's talk")
+       • Change your email: edit BOTH the mailto: link and the text after it in
+         the first <a> button.
+       • Update GitHub / LinkedIn: edit the href="..." web addresses.
+  ======================================================================== -->
+  <section id="contact" class="reveal">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>Have a project, a job opportunity, or just want to say hi?</p>
+      <div class="cta-row">
+        <a href="mailto:iamronim1@gmail.com" class="btn btn-solid">✉️ iamronim1@gmail.com</a>
+        <a href="https://github.com/iamronim1" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        <a href="https://www.linkedin.com/in/raisul-roni/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Md Raisul Islam Roni. Built with ❤️ on rironi.com</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="Section navigation">
+  <div class="dock-track"><span class="dock-fill" id="dockFill"></span></div>
+  <div class="dock-list">
+    <a href="#about" class="dock-link">About</a>
+    <a href="#experience" class="dock-link">Experience</a>
+    <a href="#projects" class="dock-link">Projects</a>
+    <a href="#education" class="dock-link">Education</a>
+    <a href="#photography" class="dock-link">Photography</a>
+    <a href="#contact" class="dock-link">Contact</a>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const navToggle = document.getElementById('navToggle');
+  const navlinks = document.getElementById('navlinks');
+  navToggle.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Scroll-spy + cumulative fill for the bottom dock
+  // Experience + Teaching sections both map to the single "Experience" dock item.
+  const dockLinks = [...document.querySelectorAll('.dock-link')];
+  const dockFill = document.getElementById('dockFill');
+  const dockList = document.querySelector('.dock-list');
+  const sectionToDock = { about:0, experience:1, teaching:1, projects:2, education:3, photography:4, contact:5 };
+  function setActive(idx){
+    dockLinks.forEach((l, i) => {
+      l.classList.toggle('active', i === idx);
+      l.classList.toggle('reached', i < idx);
+      l.classList.toggle('upcoming', i > idx);
+    });
+    const link = dockLinks[idx];
+    if (link && dockFill && dockList){
+      const h = (link.offsetTop - dockList.offsetTop) + link.offsetHeight;
+      dockFill.style.height = h + 'px';
+    }
+  }
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = sectionToDock[e.target.id];
+        if (idx !== undefined) setActive(idx);
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  Object.keys(sectionToDock).forEach(id => {
+    const t = document.getElementById(id);
+    if (t) spy.observe(t);
+  });
+  setActive(0);
+</script>
+
+</body>
+</html>
