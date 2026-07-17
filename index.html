@@ -120,7 +120,8 @@
     transition:background .2s, transform .15s;
   }
   .contact-pill:hover{background:var(--accent);transform:translateY(-1px);}
-  .nav-toggle{display:none;background:rgba(246,238,214,0.3);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(37,34,34,0.1);border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;color:var(--ink);box-shadow:0 6px 26px rgba(37,34,34,0.1);}
+  .mobile-contact{display:none;}
+  .nav-toggle{display:none;background:rgba(246,238,214,0.3);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(37,34,34,0.1);border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;color:var(--accent);box-shadow:0 6px 26px rgba(37,34,34,0.1);}
 
   /* HERO */
   .hero{
@@ -279,7 +280,7 @@
   .dock{
     position:fixed;bottom:24px;left:24px;z-index:100;
     display:flex;align-items:stretch;gap:18px;
-    background:rgba(246,238,214,0.3);
+    background:rgba(246,238,214,0.1);
     -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
     border:1px solid rgba(37,34,34,0.1);
     border-radius:18px;padding:20px 26px 20px 20px;
@@ -330,6 +331,10 @@
     .navlinks a{padding:12px 16px;}
     .navlinks.open{transform:translateY(0);}
     .nav-toggle{display:block;}
+    .contact-pill{display:none;}
+    .mobile-contact{display:block;margin-top:6px;}
+    .mobile-contact a{background:var(--ink);color:var(--paper);font-weight:600;text-align:center;border-radius:999px;}
+    .mobile-contact a:hover{background:var(--accent);color:var(--paper);}
     section{padding:72px 0;}
   }
   @media (max-width:640px){
@@ -357,6 +362,7 @@
         <li><a href="https://github.com/iamronim1" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#photography">Photography</a></li>
+        <li class="mobile-contact"><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <a href="#contact" class="contact-pill">Contact</a>
@@ -417,7 +423,7 @@
         <h2>Putting data to work</h2>
       </div>
       <div class="resume-download">
-        <a href="resume.pdf" class="btn btn-solid" download>⬇ Download Full Resume (PDF)</a>
+        <a href="resume.pdf" class="btn btn-solid" download>Download Full Resume (PDF)</a>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -561,7 +567,7 @@
         </div>
       </div>
       <div class="projects-footer">
-        <a href="https://github.com/iamronim1" target="_blank" rel="noopener" class="btn btn-outline">See all repos on GitHub ↗</a>
+        <a href="https://github.com/iamronim1" target="_blank" rel="noopener" class="btn btn-outline">See all repos on GitHub</a>
       </div>
     </div>
   </section>
